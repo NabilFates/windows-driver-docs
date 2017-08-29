@@ -137,7 +137,7 @@ The new app (not included in the DCHU sample) is secure and can be updated easil
 
 ## Registering a COM component in an INF file
 
-Fabrikam needs to register a COM component without using a co-installer.  In order to accomplish this in a universal INF file, they use the [Reg2inf tool](https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/reg2inf) distributed in the WDK.  After building their COM server project (taken from the [In-process ATL COM server sample](https://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d)), they provide the COM .dll as an input to the Reg2inf tool.  The tool then generates the following INF directives that Fabrikam includes in their base INF ([`osrfx2_DCHU_base.inx`]):
+Fabrikam needs to register a COM component in a declarative manner.  In the past, they would use non-universal mechanisms like the RegisterDlls directive or co-installers. In order to write a universal INF, they need to leverage the [AddReg INF directive](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/inf-addreg-directive). To facilitate the creation of these directives, they use the [Reg2inf tool](https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/reg2inf) distributed in the WDK.  After building their COM server project (taken from the [In-process ATL COM server sample](https://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d)), they provide the COM .dll as an input to the Reg2inf tool.  The tool then generates the following INF directives that Fabrikam includes in their base INF ([`osrfx2_DCHU_base.inx`]):
 
 ```
 ; Add all registry keys to successfully register the
